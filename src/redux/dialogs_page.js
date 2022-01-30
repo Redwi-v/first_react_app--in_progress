@@ -51,23 +51,24 @@ let initialState = {
 export const dialogsReduser = (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_NEW_MASSAGE_TEXT: {
-			let stateCopy = { ...state };
-			stateCopy.massageText = action.massageText;
-			return stateCopy;
+			return {
+				...state,
+				massageText: action.massageText,
+			};
 		}
 
 		case SEND_MASSAGE: {
-			let copyState = { ...state };
-			let massages = (copyState.massages = [...copyState.massages]);
-
 			const massage = {
-				id: massages.length + 1,
-				massage: copyState.massageText,
+				id: state.massages.length + 1,
+				massage: state.massageText,
 				name: 'me',
 			};
-			massages.push(massage);
-			copyState.massageText = '';
-			return copyState;
+
+			return {
+				...state,
+				massages: [...state.massages, massage],
+				massageText: '',
+			};
 		}
 		default:
 			return state;
