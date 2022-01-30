@@ -1,0 +1,8 @@
+.header {
+	background-color: crimson;
+	padding: 7px;
+}
+
+.header__logo {
+	width: 40px;
+}

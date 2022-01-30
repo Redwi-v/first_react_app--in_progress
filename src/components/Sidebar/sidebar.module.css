@@ -1,0 +1,6 @@
+.sidebar {
+	flex: 20%;
+	background-color: rgba(30, 143, 255, 0.733);
+	padding: 10px;
+	color: rgb(236, 232, 232);
+}

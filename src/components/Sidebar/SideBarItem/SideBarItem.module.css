@@ -1,0 +1,13 @@
+.sidebar__linck {
+}
+
+.sidebar__item:last-child {
+	margin-top: 30px;
+}
+.sidebar__item {
+	margin-top: 10px;
+}
+
+.active {
+	color: gold;
+}

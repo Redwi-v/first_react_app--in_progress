@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import './css/style.css';
+import Header from './components/Header/header';
+import Sidebar from './components/Sidebar/Sidebar';
+import Profile from './components/Profile/Profile';
+import { Route, Routes } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+	return (
+		<div className='App'>
+			<Header />
+			<div className='main'>
+				<div className='container flex'>
+					<Sidebar />
+					<div className='content'>
+						<Routes>
+							<Route path={'/'} element={<Profile />} />
+
+							<Route path={'/dialogs/*'} element={<DialogsContainer />} />
+						</Routes>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default App;

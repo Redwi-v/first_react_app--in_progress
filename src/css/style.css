@@ -1,0 +1,40 @@
+@import 'nullStyle.css';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.flex {
+	display: flex;
+}
+body {
+	color: #222;
+	font-family: fantasy;
+	font-weight: 600;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+.container {
+	max-width: 950px;
+	padding: 0 15px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.app-wraper {
+}
+
+.content {
+	flex: 80%;
+	padding: 0 10px 10px 10px;
+	overflow: auto;
+	height: 90%;
+}
+
+.main {
+	margin-top: 7px;
+	height: 100vh;
+}
