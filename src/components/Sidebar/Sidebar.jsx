@@ -9,6 +9,7 @@ export default function Sidebar() {
 				<Item to='/dialogs' name='Dialogs' />
 				<Item to='/dialogss' name='News' />
 				<Item to='/dialogss' name='Music' />
+				<Item to='/users' name='Users' />
 				<Item to='/dialogss' name='Setting' />
 			</ul>
 		</nav>
