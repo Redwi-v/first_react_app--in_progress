@@ -30,9 +30,15 @@
 .userName {
 	font-size: 18px;
 }
+.deleteFriend {
+	background-color: rgba(220, 20, 60, 0.753);
+}
+
+.addFriend {
+	background-color: rgba(57, 117, 247, 0.699);
+}
 .btn {
 	border: none;
-	background-color: rgba(57, 117, 247, 0.699);
 	color: #fff;
 	padding: 5px 8px;
 	font-size: 10px;

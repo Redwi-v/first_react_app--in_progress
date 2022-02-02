@@ -2,8 +2,9 @@ import classes from './users.module.css';
 import { User } from './User/User';
 
 export const Users = (props) => {
+	debugger;
 	let usersList = props.users.map((user) => {
-		return <User user={user} key={user.id} />;
+		return <User user={user} addFriend={props.add_friend} key={user.id} />;
 	});
 	return (
 		<div className={classes.users}>

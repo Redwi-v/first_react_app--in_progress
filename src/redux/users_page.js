@@ -20,6 +20,7 @@ export const usersReduser = (state = intitialState, action) => {
 					if (user.id === action.userid) {
 						return { ...user, friends: true };
 					}
+					return user;
 				}),
 			};
 		case DELETE_FRIEND:
@@ -38,21 +39,21 @@ export const usersReduser = (state = intitialState, action) => {
 	}
 };
 
-const addFriedAC = (userid) => {
+export const addFriedAC = (userid) => {
 	return {
 		type: ADD_FRIEND,
 		userid: userid,
 	};
 };
 
-const deleteFriendAC = (userid) => {
+export const deleteFriendAC = (userid) => {
 	return {
 		type: DELETE_FRIEND,
 		userid,
 	};
 };
 
-const getUsersAC = (newUsers) => {
+export const getUsersAC = (newUsers) => {
 	return {
 		type: GET_USERS,
 		newUsers,
