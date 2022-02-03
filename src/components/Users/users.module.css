@@ -1,11 +1,15 @@
+.users {
+	height: 100%;
+}
+
+.users_list {
+}
 .title {
 	color: rgba(30, 143, 255, 0.733);
 	font-size: 24px;
 }
 
-.showMoreBtn{
-	position: absolute;
-	left: 50%;
+.showMoreBtn {
 	border: none;
 	background-color: rgba(57, 117, 247, 0.699);
 	color: #fff;
@@ -13,4 +17,6 @@
 	border-radius: 5px;
 	font-size: 20px;
 	cursor: pointer;
+	margin: 25px 0 25px 0;
+	transform: translateX(150%);
 }
