@@ -5,6 +5,10 @@ export const User = props => {
 		props.addFriend(props.user.id);
 	};
 
+	const deleteFriend= () => {
+		props.deleteFriend(props.user.id)
+	}
+
 	return (
 		<div className={c.user}>
 			<div className={c.leftSide}>
@@ -14,7 +18,7 @@ export const User = props => {
 					alt='avatar'
 				/>
 				{props.user.friends ? (
-					<button className={`${c.deleteFriend} ${c.btn}`}>Delete friend</button>
+					<button className={`${c.deleteFriend} ${c.btn}`} onClick={deleteFriend}>Delete friend</button>
 				) : (
 					<button className={`${c.btn} ${c.addFriend}`} onClick={addFriend}>
 						Add friend

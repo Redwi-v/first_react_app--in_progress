@@ -2,3 +2,15 @@
 	color: rgba(30, 143, 255, 0.733);
 	font-size: 24px;
 }
+
+.showMoreBtn{
+	position: absolute;
+	left: 50%;
+	border: none;
+	background-color: rgba(57, 117, 247, 0.699);
+	color: #fff;
+	padding: 5px 14px;
+	border-radius: 5px;
+	font-size: 20px;
+	cursor: pointer;
+}

@@ -3,12 +3,7 @@ const DELETE_FRIEND = 'DELETE_FRIED';
 const GET_USERS = 'GET_USERS';
 
 const intitialState = {
-	users: [
-		{ id: 1, name: 'Andrei', status: 'hi, i love this world', friends: true },
-		{ id: 2, name: 'Andrei', status: 'hi, i love this world', friends: true },
-		{ id: 3, name: 'Andrei', status: 'hi, i love this world', friends: false },
-		{ id: 4, name: 'Andrei', status: 'hi, i love this world', friends: false },
-	],
+	users: [],
 };
 
 export const usersReduser = (state = intitialState, action) => {
@@ -30,6 +25,7 @@ export const usersReduser = (state = intitialState, action) => {
 					if (user.id === action.userid) {
 						return { ...user, friends: false };
 					}
+					return user
 				}),
 			};
 		case GET_USERS:

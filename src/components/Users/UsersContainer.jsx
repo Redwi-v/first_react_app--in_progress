@@ -12,6 +12,12 @@ const mapDispathToProps = (dispathc) => {
 		add_friend(userId) {
 			dispathc(addFriedAC(userId));
 		},
+		delete_friend(userId) {
+			dispathc(deleteFriendAC(userId))
+		},
+		getUsers(Users) {
+			dispathc(getUsersAC(Users))
+		},
 	};
 };
 
