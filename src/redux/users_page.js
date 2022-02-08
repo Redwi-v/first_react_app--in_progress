@@ -3,12 +3,14 @@ const DELETE_FRIEND = 'DELETE_FRIED';
 const GET_USERS = 'GET_USERS';
 const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
 const GET_TOTAL_USERS_COUNT = 'GET_TOTAL_USERS_COUNT';
+const TOGGLE_ISFECHING = 'TOGGLE_PRELOADER';
 
 const intitialState = {
 	users: [],
-	pageSize: 3,
-	totalUsersCount: 0,
-	selectedPage: 2,
+	pageSize: 5,
+	totalUsersCount: 40,
+	selectedPage: 1,
+	isFeching: false,
 };
 
 export const usersReduser = (state = intitialState, action) => {
@@ -34,7 +36,7 @@ export const usersReduser = (state = intitialState, action) => {
 				}),
 			};
 		case GET_USERS:
-			return { ...state, users: [...state.users, ...action.newUsers] };
+			return { ...state, users: [...action.newUsers] };
 		case CHANGE_CURRENT_PAGE:
 			return {
 				...state,
@@ -44,6 +46,11 @@ export const usersReduser = (state = intitialState, action) => {
 			return {
 				...state,
 				totalUsersCount: action.totalUsersCount,
+			};
+		case TOGGLE_ISFECHING:
+			return {
+				...state,
+				isFeching: action.fechingValue,
 			};
 		default:
 			return state;
@@ -64,14 +71,14 @@ export const deleteFriendAC = userid => {
 	};
 };
 
-export const getUsersAC = newUsers => {
+export const getUsers = newUsers => {
 	return {
 		type: GET_USERS,
 		newUsers,
 	};
 };
 
-export const chageCurrentPageAC = pageNumber => {
+export const chageCurrentPage = pageNumber => {
 	return {
 		type: CHANGE_CURRENT_PAGE,
 		pageNumber,
@@ -82,5 +89,12 @@ export const getTotalUsersCount = totalUsersCount => {
 	return {
 		type: GET_TOTAL_USERS_COUNT,
 		totalUsersCount,
+	};
+};
+
+export const toggleIsFeching = fechingValue => {
+	return {
+		type: TOGGLE_ISFECHING,
+		fechingValue,
 	};
 };

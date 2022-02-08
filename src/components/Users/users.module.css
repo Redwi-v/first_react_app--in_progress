@@ -21,8 +21,14 @@
 	transform: translateX(150%);
 }
 
+.buttonList {
+	color: #fff;
+	background-color: rgba(30, 143, 255, 0.733);
+	border: none;
+	padding: 5px 10px;
+}
 .selectedPage {
-	color: crimson;
+	padding: 7px 12px;
 }
 
 button {

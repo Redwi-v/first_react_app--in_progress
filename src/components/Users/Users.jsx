@@ -1,14 +1,28 @@
 import classes from './users.module.css';
 import { User } from './User/User';
+import Preloader from '../commons/Preloder/preloader';
 
 const Users = props => {
+	const {
+		users,
+		addFriend,
+		changeCurrentPage,
+		totalUsersCount,
+		pageSize,
+		selectedPage,
+		isFeching,
+	} = props;
+
 	const renderUsersList = () => {
-		return props.users.map(user => {
+		if (isFeching) {
+			return <Preloader />;
+		}
+		return users.map(user => {
 			return (
 				<User
 					user={user}
-					addFriend={props.add_friend}
-					deleteFriend={props.delete_friend}
+					addFriend={addFriend}
+					deleteFriend={props.deleteFriend}
 					key={user.id}
 				/>
 			);
@@ -16,7 +30,7 @@ const Users = props => {
 	};
 
 	const renderPageButtons = () => {
-		let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+		let pagesCount = Math.ceil(totalUsersCount / pageSize);
 		let pages = [];
 		for (let i = 1; i <= pagesCount; i++) {
 			pages.push(i);
@@ -25,9 +39,11 @@ const Users = props => {
 		return pages.map(page => {
 			return (
 				<button
-					className={props.selectedPage === page ? classes.selectedPage : ''}
+					className={`${selectedPage === page ? classes.selectedPage : ''} , ${
+						classes.buttonList
+					}`}
 					key={page}
-					onClick={() => props.ChageCurrentPageHandler(page)}>
+					onClick={() => changeCurrentPage(page)}>
 					{page}
 				</button>
 			);
@@ -38,6 +54,7 @@ const Users = props => {
 		<div className={classes.users}>
 			<h1 className={classes.title}>Users</h1>
 			<div className=''>{renderPageButtons()}</div>
+
 			<ul className={classes.users_list}>{renderUsersList()}</ul>
 
 			<button className={classes.showMoreBtn} onClick={props.getUsers}>
