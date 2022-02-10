@@ -18,7 +18,7 @@ export const User = props => {
 	return (
 		<li className={c.user}>
 			<div className={c.leftSide}>
-				<Link to='/'>
+				<Link to={'/profile/' + props.user.id}>
 					<img className={c.userAvatar} src={checkChoseAvatar} alt='avatar' />
 				</Link>
 				{props.user.friends ? (

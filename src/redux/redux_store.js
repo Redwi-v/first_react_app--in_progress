@@ -10,4 +10,4 @@ let reduses = combineReducers({
 });
 
 export let store = createStore(reduses);
-window.store = store;
+window.state = store;

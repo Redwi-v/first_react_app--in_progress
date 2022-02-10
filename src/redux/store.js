@@ -1,8 +1,5 @@
-import { profileReduser } from "./profile_page";
-import { dialogsReduser } from "./dialogs_page";
-
-
-
+import { profileReduser } from './profile_page';
+import { dialogsReduser } from './dialogs_page';
 
 export const store = {
 	_stateData: {
@@ -74,15 +71,11 @@ export const store = {
 	},
 
 	dispatch(action) {
-		this._stateData.ProfilePage = profileReduser(this._stateData.ProfilePage, action)
+		this._stateData.ProfilePage = profileReduser(this._stateData.ProfilePage, action);
 		this._stateData.dialogsPage = dialogsReduser(this._stateData.dialogsPage, action);
 
-		this.collSubscriber(this._stateData)
+		this.collSubscriber(this._stateData);
 	},
 };
 
-document.state = store;
-
-
-
-
+document.body.state = store;

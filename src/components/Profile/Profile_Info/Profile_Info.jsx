@@ -1,11 +1,16 @@
 import classes from './Profile.module.css';
 
 export default function (props) {
+	const { photos } = props.profile;
+
 	return (
 		<div className={classes.profile__info}>
 			<img
 				className={classes['profile__header-img']}
-				src='https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701313431.jpg'
+				src={
+					photos.large ||
+					`https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701313431.jpg`
+				}
 				alt=''
 			/>
 
