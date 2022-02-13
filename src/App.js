@@ -1,20 +1,21 @@
 import './css/style.css';
-import Header from './components/Header/header';
 import Sidebar from './components/Sidebar/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { Route, Routes } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 function App(props) {
 	return (
 		<div className='App'>
-			<Header />
+			<HeaderContainer />
 			<div className='main'>
 				<div className='container flex'>
 					<Sidebar />
 					<div className='content'>
 						<Routes>
+							<Route path={'/profile/:userId'} element={<ProfileContainer />} />
 							<Route path={'/profile/*'} element={<ProfileContainer />} />
 
 							<Route path={'/dialogs/*'} element={<DialogsContainer />} />

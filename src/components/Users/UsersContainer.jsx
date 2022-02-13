@@ -10,14 +10,14 @@ import {
 } from '../../redux/users_page';
 import axios from 'axios';
 import React from 'react';
+import userAPI from '../../API/userAPI';
 
 class UsersAPIcomponent extends React.Component {
 	sendRequestToUsers = selectPage => {
 		this.props.toggleIsFeching(true);
-		let linkForUsers = `https://social-network.samuraijs.com/api/1.0/users?page=${selectPage}&count=${this.props.pageSize}`;
 
-		axios.get(linkForUsers).then(response => {
-			this.props.getUsers(response.data.items);
+		userAPI.getUsers(selectPage, this.props.pageSize).then(data => {
+			this.props.getUsers(data.items);
 			this.props.toggleIsFeching(false);
 
 			// this.props.getTotalUserCount(response.data.totalCount); // слишком много пока

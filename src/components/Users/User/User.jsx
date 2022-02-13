@@ -1,13 +1,41 @@
 import c from './user.module.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export const User = props => {
 	const addFriend = () => {
-		props.addFriend(props.user.id);
+		axios
+			.post(
+				`https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`,
+				{},
+				{
+					withCredentials: true,
+					headers: {
+						'API-KEY': 'ee72656b-e4b6-457f-983f-35457a0d8aec',
+					},
+				},
+			)
+			.then(res => {
+				if (res.data.resultCode === 0) {
+					props.addFriend(props.user.id);
+				}
+			});
 	};
 
 	const deleteFriend = () => {
-		props.deleteFriend(props.user.id);
+		axios
+			.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`, {
+				withCredentials: true,
+				headers: {
+					'API-KEY': 'ee72656b-e4b6-457f-983f-35457a0d8aec',
+				},
+			})
+			.then(res => {
+				console.log(res);
+				if (res.data.resultCode === 0) {
+					props.deleteFriend(props.user.id);
+				}
+			});
 	};
 
 	const checkChoseAvatar =
@@ -21,7 +49,8 @@ export const User = props => {
 				<Link to={'/profile/' + props.user.id}>
 					<img className={c.userAvatar} src={checkChoseAvatar} alt='avatar' />
 				</Link>
-				{props.user.friends ? (
+
+				{props.user.followed ? (
 					<button className={`${c.deleteFriend} ${c.btn}`} onClick={deleteFriend}>
 						Delete friend
 					</button>

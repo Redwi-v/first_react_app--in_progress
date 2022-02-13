@@ -1,7 +1,7 @@
 import classes from './Profile.module.css';
 
 export default function (props) {
-	const { photos } = props.profile;
+	const { photos, fullName, aboutMe } = props.profile;
 
 	return (
 		<div className={classes.profile__info}>
@@ -17,11 +17,14 @@ export default function (props) {
 			<div className={classes.main__info}>
 				<img
 					className={classes.profile__img}
-					src='https://avatars.mds.yandex.net/i?id=d6ab550a20170242f731eee5f3e595be-4571053-images-thumbs&n=13&exp=1'
+					src={
+						photos.small ||
+						'https://avatars.mds.yandex.net/i?id=d6ab550a20170242f731eee5f3e595be-4571053-images-thumbs&n=13&exp=1'
+					}
 					alt=''
 				/>
 				<div className={classes.profile__about}>
-					<h3 className={classes.profile__name}>Andrei K.</h3>
+					<h3 className={classes.profile__name}>{fullName}</h3>
 					<p className={classes.profile__birth}>
 						Date of Birth:
 						<span className={classes['profile__birth-value']}> 2 jaruary</span>
@@ -29,6 +32,7 @@ export default function (props) {
 					<p className={classes.profile__city}>
 						City: <span className={classes['profile__city-value']}>Minsk</span>
 					</p>
+					<p className={classes.status}>{aboutMe}</p>
 				</div>
 			</div>
 		</div>

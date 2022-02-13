@@ -5,4 +5,12 @@
 
 .header__logo {
 	width: 40px;
+	height: 40px;
 }
+
+.wraper {
+	display: flex;
+	justify-content: space-between;
+}
+
+

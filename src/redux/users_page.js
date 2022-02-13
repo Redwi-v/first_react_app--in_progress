@@ -20,7 +20,7 @@ export const usersReduser = (state = intitialState, action) => {
 				...state,
 				users: state.users.map(user => {
 					if (user.id === action.userid) {
-						return { ...user, friends: true };
+						return { ...user, followed: true };
 					}
 					return user;
 				}),
@@ -30,7 +30,7 @@ export const usersReduser = (state = intitialState, action) => {
 				...state,
 				users: state.users.map(user => {
 					if (user.id === action.userid) {
-						return { ...user, friends: false };
+						return { ...user, followed: false };
 					}
 					return user;
 				}),

@@ -5,7 +5,7 @@ export default function Sidebar() {
 	return (
 		<nav className={classes.sidebar}>
 			<ul className={classes.sidebar__list}>
-				<Item to='/' name='Profile' />
+				<Item to='/profile' name='Profile' />
 				<Item to='/dialogs' name='Dialogs' />
 				<Item to='/dialogss' name='News' />
 				<Item to='/dialogss' name='Music' />

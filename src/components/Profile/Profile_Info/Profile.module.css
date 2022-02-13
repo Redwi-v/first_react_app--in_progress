@@ -4,6 +4,12 @@
 	object-fit: cover;
 }
 
+.status {
+	border-top: 1px solid #222;
+	margin-top: 10px;
+	padding-top: 5px;
+}
+
 .profile__info {
 }
 
