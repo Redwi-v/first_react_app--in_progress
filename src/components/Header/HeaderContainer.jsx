@@ -1,33 +1,20 @@
 import { connect } from 'react-redux';
 import Header from './Header';
-import { setUserAuthData, setAuthUserProfileInfo } from '../../redux/auth_reduser';
+import { getAuthUserData, getAuthUserInfo } from '../../redux/auth_reduser';
 import { useEffect } from 'react';
-import axios from 'axios';
+import authApi from '../../API/authApi';
 
 const HeaderContainer = props => {
-	const getAuthUserProfileIngo = userId => {
-		if (userId) {
-			axios
-				.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-				.then(res => {
-					props.setAuthUserProfileInfo(res.data);
-				});
-		}
-	};
-	const getAuthUserInfo = () => {
-		axios
-			.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-				withCredentials: true,
-			})
-			.then(res => {
-				const { id, login, email } = res.data.data;
-				props.setUserAuthData(id, email, login);
-			});
-	};
+	const {
+		userId,
+		// methods
+		getAuthUserData,
+		getAuthUserInfo,
+	} = props;
 
 	useEffect(() => {
 		getAuthUserInfo();
-		getAuthUserProfileIngo(props.userId);
+		userId && getAuthUserData(props.userId);
 	}, [props.isAuth]);
 
 	return <Header {...props} />;
@@ -45,6 +32,7 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { setUserAuthData, setAuthUserProfileInfo })(
-	HeaderContainer,
-);
+export default connect(mapStateToProps, {
+	getAuthUserData,
+	getAuthUserInfo,
+})(HeaderContainer);

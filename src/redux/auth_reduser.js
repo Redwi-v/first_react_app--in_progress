@@ -1,3 +1,6 @@
+import userAPI from '../API/userAPI';
+import authApi from '../API/authApi';
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_PROFILE_INFO = 'SET_USER_PROFILE_INFO';
 
@@ -32,6 +35,22 @@ export const authReduser = (state = initialState, action) => {
 			return state;
 	}
 };
+
+//thunks
+export const getAuthUserData = userId => dispatch => {
+	userAPI.getProfile(userId).then(res => {
+		dispatch(setAuthUserProfileInfo(res.data));
+	});
+};
+
+export const getAuthUserInfo = () => dispatch => {
+	authApi.me().then(res => {
+		const { id, login, email } = res.data.data;
+		dispatch(setUserAuthData(id, email, login));
+	});
+};
+
+//AC
 
 export const setUserAuthData = (userId, email, login) => {
 	return {

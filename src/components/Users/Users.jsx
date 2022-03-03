@@ -11,6 +11,8 @@ const Users = props => {
 		pageSize,
 		selectedPage,
 		isFeching,
+		toggleFollowingProgress,
+		followingProgress,
 	} = props;
 
 	const renderUsersList = () => {
@@ -24,6 +26,8 @@ const Users = props => {
 					addFriend={addFriend}
 					deleteFriend={props.deleteFriend}
 					key={user.id}
+					toggleFollowingProgress={toggleFollowingProgress}
+					followingProgress={followingProgress}
 				/>
 			);
 		});

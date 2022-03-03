@@ -1,27 +1,17 @@
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
-	addFriedAC,
-	deleteFriendAC,
-	getUsers,
+	addFriend,
+	deleteFriend,
 	chageCurrentPage,
-	getTotalUsersCount,
-	toggleIsFeching,
+	toggleFollowingProgress,
+	getUsersThunkCreator,
 } from '../../redux/users_page';
-import axios from 'axios';
 import React from 'react';
-import userAPI from '../../API/userAPI';
 
 class UsersAPIcomponent extends React.Component {
 	sendRequestToUsers = selectPage => {
-		this.props.toggleIsFeching(true);
-
-		userAPI.getUsers(selectPage, this.props.pageSize).then(data => {
-			this.props.getUsers(data.items);
-			this.props.toggleIsFeching(false);
-
-			// this.props.getTotalUserCount(response.data.totalCount); // слишком много пока
-		});
+		this.props.getUsersThunkCreator(selectPage, this.props.pageSize);
 	};
 
 	componentDidMount() {
@@ -37,13 +27,14 @@ class UsersAPIcomponent extends React.Component {
 		return (
 			<Users
 				users={this.props.users}
-				addFriend={this.props.add_friend}
-				deleteFriend={this.props.delete_friend}
+				addFriend={this.props.addFriend}
+				deleteFriend={this.props.deleteFriend}
 				totalUsersCount={this.props.totalUsersCount}
 				pageSize={this.props.pageSize}
 				changeCurrentPage={this.ChageCurrentPageHandler}
 				selectedPage={this.props.selectedPage}
 				isFeching={this.props.isFeching}
+				followingProgress={this.props.followingProgress}
 			/>
 		);
 	}
@@ -55,6 +46,7 @@ const mapStateToProps = state => {
 		pageSize: state.usersPage.pageSize,
 		totalUsersCount: state.usersPage.totalUsersCount,
 		selectedPage: state.usersPage.selectedPage,
+		followingProgress: state.usersPage.followingProgress,
 		isFeching: state.usersPage.isFeching,
 	};
 };
@@ -82,12 +74,11 @@ const mapStateToProps = state => {
 // };
 
 let actionCreators = {
-	add_friend: addFriedAC,
-	delete_friend: deleteFriendAC,
-	getUsers,
+	addFriend,
+	deleteFriend,
 	chageCurrentPage,
-	getTotalUsersCount,
-	toggleIsFeching,
+	toggleFollowingProgress,
+	getUsersThunkCreator,
 };
 
 const UsersContainer = connect(mapStateToProps, actionCreators)(UsersAPIcomponent);

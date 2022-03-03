@@ -1,18 +1,21 @@
-import axios from 'axios';
-
-const axsiosUsersIstans = axios.create({
-	withCredentials: true,
-	baseURL: 'https://social-network.samuraijs.com/api/1.0/users/',
-	headers: {
-		'API-KEY': ' ee72656b-e4b6-457f-983f-35457a0d8aec',
-	},
-});
+import axsiosIstans from './axsios_instans';
 
 class UserAPI {
 	getUsers(selectPage = 1, pageSize = 8) {
-		return axsiosUsersIstans
-			.get(`?page=${selectPage}&count=${pageSize}`)
+		return axsiosIstans
+			.get(`users?page=${selectPage}&count=${pageSize}`)
 			.then(res => res.data);
+	}
+
+	addFriend(userId) {
+		return axsiosIstans.post(`follow/${userId}`);
+	}
+	deleteFriend(userId) {
+		return axsiosIstans.delete(`follow/${userId}`);
+	}
+
+	getProfile(userId) {
+		return axsiosIstans.get('profile/' + userId);
 	}
 }
 

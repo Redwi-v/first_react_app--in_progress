@@ -1,3 +1,5 @@
+import userApi from '../API/userAPI';
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -41,6 +43,12 @@ export const profileReduser = (state = initialState, action) => {
 		default:
 			return state;
 	}
+};
+
+//thunks
+export const getuserProfile = userId => async dispatch => {
+	const res = await userApi.getProfile(userId);
+	dispatch(setUserProfile(res.data));
 };
 
 export const addPsotActionCreator = () => ({
