@@ -2,6 +2,8 @@ import style from './header.module.css';
 import HeaderProfile from './HeaderProfile/HeaderProfile';
 
 export default function Header(props) {
+	const { fullName, smallPhoto, isAuth } = props;
+
 	return (
 		<header className={style.header}>
 			<div className='container'>
@@ -12,7 +14,7 @@ export default function Header(props) {
 						alt=''
 					/>
 
-					<HeaderProfile photo={props.smallPhoto} fullName={props.fullName} />
+					<HeaderProfile photo={smallPhoto} fullName={fullName} isAuth={isAuth} />
 				</div>
 			</div>
 		</header>

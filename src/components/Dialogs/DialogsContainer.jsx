@@ -1,18 +1,17 @@
 import Dialogs from './Dialogs';
-import {
-	updateNewMassageTextActionCreator,
-	sendMassageActionCreator,
-} from '../../redux/dialogs_page';
+import { updateNewMassageTextActionCreator, sendMassageActionCreator } from '../../redux/dialogs_page';
 import { connect } from 'react-redux';
+import withRedirect from '../../hoc/withRedirect';
+import { compose } from 'redux';
 
-const f1 = (state) => {
+const mapStateToProps = state => {
 	return {
 		dialogs: state.dialogsPage.dialogs,
 		newMassageText: state.dialogsPage.massageText,
 		massages: state.dialogsPage.massages,
 	};
 };
-const f2 = (dispatch) => {
+const mapDispatchToProps = dispatch => {
 	return {
 		updateNewMassageText(text) {
 			const action = updateNewMassageTextActionCreator(text);
@@ -24,5 +23,8 @@ const f2 = (dispatch) => {
 	};
 };
 
-const DialogsContainer = connect(f1, f2)(Dialogs);
-export default DialogsContainer;
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+
+	withRedirect,
+)(Dialogs);

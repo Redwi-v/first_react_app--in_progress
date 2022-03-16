@@ -1,4 +1,4 @@
-import userAPI from '../API/userAPI';
+import userAPI from '../API/user';
 
 const ADD_FRIEND = 'ADD_FRIED';
 const DELETE_FRIEND = 'DELETE_FRIED';

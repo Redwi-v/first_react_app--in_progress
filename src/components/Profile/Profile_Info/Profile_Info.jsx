@@ -1,7 +1,9 @@
 import classes from './Profile.module.css';
+import ProfileStatus from './ProfileStatus';
 
 export default function (props) {
-	const { photos, fullName, aboutMe } = props.profile;
+	const { photos, fullName } = props.profile;
+	const { status, updateStatus } = props;
 
 	return (
 		<div className={classes.profile__info}>
@@ -32,7 +34,7 @@ export default function (props) {
 					<p className={classes.profile__city}>
 						City: <span className={classes['profile__city-value']}>Minsk</span>
 					</p>
-					<p className={classes.status}>{aboutMe}</p>
+					<ProfileStatus status={status || 'update Status'} updateStatus={updateStatus} />
 				</div>
 			</div>
 		</div>

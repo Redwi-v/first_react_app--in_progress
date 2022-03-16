@@ -19,7 +19,7 @@ export const User = props => {
 	return (
 		<li className={c.user}>
 			<div className={c.leftSide}>
-				<Link to={'/profile/' + user.id}>
+				<Link to={'/profile/' + user.id}>	
 					<img className={c.userAvatar} src={checkChoseAvatar} alt='avatar' />
 				</Link>
 

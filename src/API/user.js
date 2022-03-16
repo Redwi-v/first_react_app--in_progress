@@ -1,10 +1,9 @@
 import axsiosIstans from './axsios_instans';
+import profile from './profile';
 
 class UserAPI {
 	getUsers(selectPage = 1, pageSize = 8) {
-		return axsiosIstans
-			.get(`users?page=${selectPage}&count=${pageSize}`)
-			.then(res => res.data);
+		return axsiosIstans.get(`users?page=${selectPage}&count=${pageSize}`).then(res => res.data);
 	}
 
 	addFriend(userId) {
@@ -15,7 +14,8 @@ class UserAPI {
 	}
 
 	getProfile(userId) {
-		return axsiosIstans.get('profile/' + userId);
+		console.warn('use new method!!!');
+		return profile.getProfile(userId);
 	}
 }
 
