@@ -1,5 +1,11 @@
+import LoginReduxForm from './LofinForm/LoginForm';
+
 const Login = props => {
-	return <h1>Login</h1>;
+	return (
+		<div className='Login'>
+			<LoginReduxForm />
+		</div>
+	);
 };
 
 export default Login;

@@ -26,12 +26,8 @@
 	background-color: rgba(30, 143, 255, 0.733);
 	border: none;
 	padding: 5px 10px;
+	margin: 0 5px;
 }
 .selectedPage {
 	padding: 7px 12px;
-}
-
-button {
-	padding: 5px;
-	margin: 0 5px;
 }

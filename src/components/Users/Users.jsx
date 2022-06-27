@@ -43,9 +43,7 @@ const Users = props => {
 		return pages.map(page => {
 			return (
 				<button
-					className={`${selectedPage === page ? classes.selectedPage : ''} , ${
-						classes.buttonList
-					}`}
+					className={`${selectedPage === page ? classes.selectedPage : ''} , ${classes.buttonList}`}
 					key={page}
 					onClick={() => changeCurrentPage(page)}>
 					{page}

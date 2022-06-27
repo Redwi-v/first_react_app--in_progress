@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
 
 const ProfileStatus = props => {
@@ -15,6 +15,10 @@ const ProfileStatus = props => {
 			updateStatus(state.status);
 		}
 	};
+
+	useEffect(() => {
+		setState({ ...state, status: status });
+	}, [status]);
 
 	const changeInputStatus = e => {
 		const value = e.target.value;

@@ -1,5 +1,5 @@
-import userAPI from '../API/user';
 import authApi from '../API/auth';
+import profileApi from '../API/profile';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_PROFILE_INFO = 'SET_USER_PROFILE_INFO';
@@ -38,7 +38,7 @@ export const authReduser = (state = initialState, action) => {
 
 //thunks
 export const getAuthUserData = userId => dispatch => {
-	userAPI.getProfile(userId).then(res => {
+	profileApi.getProfile(userId).then(res => {
 		dispatch(setAuthUserProfileInfo(res.data));
 	});
 };
@@ -52,6 +52,15 @@ export const getAuthUserInfo = () => dispatch => {
 		const { id, login, email } = res.data.data;
 		dispatch(setUserAuthData(id, email, login, isAuth));
 	});
+};
+
+export const login = (email, password, rememberMe) => async dispatch => {
+	console.log(email, password, rememberMe);
+	const { resultCode } = await (await authApi.login(email, password, rememberMe)).data;
+
+	if (resultCode === 0) {
+		dispatch(getAuthUserInfo());
+	}
 };
 
 //AC

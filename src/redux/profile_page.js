@@ -1,4 +1,3 @@
-import userApi from '../API/user';
 import profileApi from '../API/profile';
 
 const ADD_POST = 'ADD-POST';
@@ -14,7 +13,6 @@ let initialState = {
 		{ id: 3, text: 'hi my posts' },
 		{ id: 4, text: 'hi 11my posts' },
 	],
-	newPostText: 'aaa',
 	profile: null,
 	status: null,
 };
@@ -24,19 +22,13 @@ export const profileReduser = (state = initialState, action) => {
 		case ADD_POST: {
 			let newPost = {
 				id: state.myPosts.length + 1,
-				text: state.newPostText,
+				text: action.postText,
 			};
 
 			return {
 				...state,
 				myPosts: [...state.myPosts, newPost],
 				newPostText: '',
-			};
-		}
-		case UPDATE_NEW_POST_TEXT: {
-			return {
-				...state,
-				newPostText: action.text,
 			};
 		}
 		case SET_USER_PROFILE:
@@ -55,17 +47,18 @@ export const profileReduser = (state = initialState, action) => {
 
 //thunks
 export const getuserProfile = userId => async dispatch => {
-	const res = await userApi.getProfile(userId);
+	const res = await profileApi.getProfile(userId);
 	dispatch(setUserProfile(res.data));
 };
 export const getStatus = userId => dispatch => {
-	profileApi.getStatus(userId).then(status => {});
+	profileApi.getStatus(userId).then(status => {
+		dispatch(setStatus(status));
+	});
 };
 
 export const updateStatus = status => dispatch => {
 	profileApi.updateStatus(status).then(res => {
-		console.log(res);
-		if (res.resultCode === 0) {
+		if (res.data.resultCode === 0) {
 			dispatch(setStatus(status));
 		} else {
 			console.log('invalid status');
@@ -74,15 +67,10 @@ export const updateStatus = status => dispatch => {
 };
 
 // Ac
-export const addPsotActionCreator = () => ({
+export const addPsotActionCreator = postText => ({
 	type: ADD_POST,
+	postText,
 });
-export const updateNewPostTextActionCreator = text => {
-	return {
-		type: UPDATE_NEW_POST_TEXT,
-		text: text,
-	};
-};
 export const setUserProfile = profile => {
 	return {
 		type: SET_USER_PROFILE,

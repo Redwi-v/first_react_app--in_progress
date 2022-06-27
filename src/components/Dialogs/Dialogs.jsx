@@ -1,3 +1,4 @@
+import { Formik, Form, Field } from 'formik';
 import classes from './Dialogs.module.css';
 import Item from './dialogs_items/Item';
 import Massage from './Massage/Massage';
@@ -5,32 +6,20 @@ import Massage from './Massage/Massage';
 export default function (props) {
 	const renderDialogs = () => {
 		let dialogs = props.dialogs;
-		return dialogs.map((dilog) => (
-			<Item key={dilog.id} id={dilog.id} name={dilog.name} />
-		));
+		return dialogs.map(dilog => <Item key={dilog.id} id={dilog.id} name={dilog.name} />);
 	};
 
 	const renderMassages = () => {
 		let massages = props.massages;
-		return massages.map((massage) => {
-			return (
-				<Massage
-					key={massage.id}
-					id={massage.id}
-					name={massage.name}
-					massage={massage.massage}
-				/>
-			);
+		return massages.map(massage => {
+			return <Massage key={massage.id} id={massage.id} name={massage.name} massage={massage.massage} />;
 		});
 	};
 
-	const updateMassageText = (event) => {
-		let text = event.target.value;
-		props.updateNewMassageText(text);
-	};
-
-	const sendMassage = () => {
-		props.sendMassage();
+	const sendMassage = (values, { setSubmitting, resetForm }) => {
+		props.sendMassage(values.massage);
+		setSubmitting(false);
+		resetForm('');
 	};
 
 	return (
@@ -40,15 +29,24 @@ export default function (props) {
 				<ul className={classes.dialogs_list}>{renderDialogs()}</ul>
 				<div className={classes.massages}>
 					<ul className={classes.massages__list}>{renderMassages()}</ul>
-					<textarea
-						className={classes.createMassage}
-						onChange={updateMassageText}
-						value={props.newMassageText}></textarea>
+					<MassageForm onSubmitFuction={sendMassage} />
 				</div>
-				<button onClick={sendMassage} className={classes.sendButton}>
-					sendMass
-				</button>
 			</div>
 		</div>
 	);
 }
+
+const MassageForm = ({ onSubmitFuction }) => {
+	return (
+		<Formik initialValues={{ massage: '' }} onSubmit={onSubmitFuction}>
+			{({ isSubmitting }) => (
+				<Form>
+					<Field className={classes.createMassage} name='massage' component='textarea' />
+					<button type='submit' className={classes.sendButton} disabled={isSubmitting}>
+						sendMass
+					</button>
+				</Form>
+			)}
+		</Formik>
+	);
+};

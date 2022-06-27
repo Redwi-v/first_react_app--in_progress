@@ -1,5 +1,5 @@
 import Dialogs from './Dialogs';
-import { updateNewMassageTextActionCreator, sendMassageActionCreator } from '../../redux/dialogs_page';
+import { sendMassage } from '../../redux/dialogs_page';
 import { connect } from 'react-redux';
 import withRedirect from '../../hoc/withRedirect';
 import { compose } from 'redux';
@@ -11,16 +11,8 @@ const mapStateToProps = state => {
 		massages: state.dialogsPage.massages,
 	};
 };
-const mapDispatchToProps = dispatch => {
-	return {
-		updateNewMassageText(text) {
-			const action = updateNewMassageTextActionCreator(text);
-			dispatch(action);
-		},
-		sendMassage() {
-			dispatch(sendMassageActionCreator());
-		},
-	};
+const mapDispatchToProps = {
+	sendMassage,
 };
 
 export default compose(

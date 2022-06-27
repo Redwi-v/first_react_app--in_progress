@@ -1,0 +1,33 @@
+.input {
+	display: block;
+}
+
+.rememberMeLable {
+	padding-left: 8px;
+	cursor: pointer;
+}
+
+.sendBtn {
+	background-color: rgba(30, 143, 255, 0.733);
+	border: none;
+	max-width: 200px;
+	width: 100%;
+	margin-top: 12px;
+	padding: 5px;
+	color: #fff;
+}
+
+.sendBtn:disabled {
+	background-color: #333;
+}
+
+.error {
+	background-color: #e03e3ed3;
+	padding: 5px;
+	color: #fff;
+}
+
+.field {
+	margin-bottom: 10px;
+	max-width: 180px;
+}

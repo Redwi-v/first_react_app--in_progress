@@ -35,8 +35,4 @@ const dispatches = {
 	updateStatus,
 };
 
-export default compose(
-	connect(mapStateToProps, dispatches),
-
-	// withRedirect,
-)(ProfileContainer);
+export default compose(connect(mapStateToProps, dispatches), withRedirect)(ProfileContainer);

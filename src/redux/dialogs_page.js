@@ -1,4 +1,3 @@
-const UPDATE_NEW_MASSAGE_TEXT = 'UPDATE-NEW-MASSAGE-TEXT';
 const SEND_MASSAGE = 'SAND-MASSAGE';
 
 let initialState = {
@@ -45,29 +44,20 @@ let initialState = {
 		{ id: 9, massage: 'hi how are you', name: 'me' },
 		{ id: 10, massage: 'hi how are you', name: 'me' },
 	],
-	massageText: 'hi',
 };
 
 export const dialogsReduser = (state = initialState, action) => {
 	switch (action.type) {
-		case UPDATE_NEW_MASSAGE_TEXT: {
-			return {
-				...state,
-				massageText: action.massageText,
-			};
-		}
-
 		case SEND_MASSAGE: {
 			const massage = {
 				id: state.massages.length + 1,
-				massage: state.massageText,
+				massage: action.massage,
 				name: 'me',
 			};
 
 			return {
 				...state,
 				massages: [...state.massages, massage],
-				massageText: '',
 			};
 		}
 		default:
@@ -75,15 +65,9 @@ export const dialogsReduser = (state = initialState, action) => {
 	}
 };
 
-export const updateNewMassageTextActionCreator = (massageText) => {
-	return {
-		type: UPDATE_NEW_MASSAGE_TEXT,
-		massageText: massageText,
-	};
-};
-
-export const sendMassageActionCreator = () => {
+export const sendMassage = massage => {
 	return {
 		type: SEND_MASSAGE,
+		massage,
 	};
 };
