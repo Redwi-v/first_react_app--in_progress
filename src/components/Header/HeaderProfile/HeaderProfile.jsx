@@ -1,8 +1,11 @@
 import style from './headerPorofile.module.css';
 import { NavLink } from 'react-router-dom';
 
+
 const HeaderProfile = props => {
 	const { isAuth } = props;
+
+
 
 	const choiseUserPhoto =
 		props.smallPhoto ||

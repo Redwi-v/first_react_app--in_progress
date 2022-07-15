@@ -2,8 +2,15 @@ import style from './loginForm.module.css';
 import { Field, Form, Formik } from 'formik';
 import { connect } from 'react-redux';
 import { login } from '../../../redux/auth_reduser';
+import {Navigate} from 'react-router-dom'
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, isAuth }) => {
+
+	console.log(isAuth)
+	if(isAuth) {
+		return <Navigate to={'/profile'}/>
+	}
+
 	return (
 		// <form action=''>
 		// 	<input plaseholder='login' type='text' />
@@ -66,4 +73,10 @@ const ErrorMessage = ({ touched, error }) => {
 	) : null;
 };
 
-export default connect(null, { login })(LoginForm);
+const mapSateToProps = (state) => {
+	return {
+		isAuth: state.authReduser.isAuth
+	}
+}
+
+export default connect(mapSateToProps, { login })(LoginForm);

@@ -7,6 +7,9 @@ class AuthApi {
 	login(email, password, rememberMe) {
 		return axsiosIstans.post('auth/login', { email, password, rememberMe });
 	}
+	logout() {
+		return axsiosIstans.delete('auth/login')
+	}
 }
 
 export default new AuthApi();

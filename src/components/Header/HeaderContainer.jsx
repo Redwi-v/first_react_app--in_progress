@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import Header from './Header';
-import { getAuthUserData, getAuthUserInfo } from '../../redux/auth_reduser';
+import { getAuthUserData, getAuthUserInfo, logout } from '../../redux/auth_reduser';
 import { useEffect } from 'react';
 
 const HeaderContainer = props => {
 	const {
+
 		userId,
 		// methods
 		getAuthUserData,
@@ -34,4 +35,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
 	getAuthUserData,
 	getAuthUserInfo,
+	logout
 })(HeaderContainer);

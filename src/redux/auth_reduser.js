@@ -55,13 +55,17 @@ export const getAuthUserInfo = () => dispatch => {
 };
 
 export const login = (email, password, rememberMe) => async dispatch => {
-	console.log(email, password, rememberMe);
-	const { resultCode } = await (await authApi.login(email, password, rememberMe)).data;
-
-	if (resultCode === 0) {
+	const { data } = await authApi.login(email, password, rememberMe)
+	if (data.resultCode === 0) {
 		dispatch(getAuthUserInfo());
 	}
 };
+export const logout = () => async (dispatch) => {
+	const {data} = await authApi.logout()
+	if(data.resultCode === 0) {
+		dispatch(setUserAuthData(null, null, null, false))
+	}
+} 
 
 //AC
 
