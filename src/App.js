@@ -1,35 +1,51 @@
-import './css/style.css';
-import Sidebar from './components/Sidebar/Sidebar';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import { Route, Routes } from 'react-router-dom';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
+import "./css/style.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import { Route, Routes } from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
+import { useEffect } from "react";
+import { initializationApp } from "./redux/app";
+import Preloader from "./components/commons/Preloder/preloader";
+import { connect } from "react-redux";
 
-function App(props) {
-	return (
-		<div className='App'>
-			<HeaderContainer />
-			<div className='main'>
-				<div className='container flex'>
-					<Sidebar />
-					<div className='content'>
-						<Routes>
-							<Route path={'/profile/:userId'} element={<ProfileContainer />} />
-							<Route path={'/profile/*'} element={<ProfileContainer />} />
+function App({ initializationApp, isInializtate }) {
+  useEffect(() => {
+    initializationApp();
+  }, []);
 
-							<Route path={'/dialogs/*'} element={<DialogsContainer />} />
+  if (!isInializtate) return <Preloader />;
 
-							<Route path={'/users/*'} element={<UsersContainer />} />
+  return (
+    <div className="App">
+      <HeaderContainer />
+      <div className="main">
+        <div className="container flex">
+          <Sidebar />
+          <div className="content">
+            <Routes>
+              <Route path={"/profile/:userId"} element={<ProfileContainer />} />
+              <Route path={"/profile/*"} element={<ProfileContainer />} />
 
-							<Route path={'/login/*'} element={<Login />} />
-						</Routes>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+              <Route path={"/dialogs/*"} element={<DialogsContainer />} />
+
+              <Route path={"/users/*"} element={<UsersContainer />} />
+
+              <Route path={"/"} element={<Login />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isInializtate: state.app.isInializtate,
+  };
+};
+
+export default connect(mapStateToProps, { initializationApp })(App);

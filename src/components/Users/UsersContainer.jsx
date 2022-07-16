@@ -1,54 +1,62 @@
-import { connect } from 'react-redux';
-import Users from './Users';
+import { connect } from "react-redux";
+import Users from "./Users";
 import {
-	addFriend,
-	deleteFriend,
-	chageCurrentPage,
-	toggleFollowingProgress,
-	getUsersThunkCreator,
-} from '../../redux/users_page';
-import React from 'react';
+  addFriend,
+  deleteFriend,
+  chageCurrentPage,
+  toggleFollowingProgress,
+  getUsersThunkCreator,
+} from "../../redux/users_page";
+import React from "react";
+import {
+  getFollowingProgress,
+  getIsFeching,
+  getPageSize,
+  getSelectedPage,
+  getTotalUsersCount,
+  getUsers,
+} from "../../redux/selectors/users";
 
 class UsersAPIcomponent extends React.Component {
-	sendRequestToUsers = selectPage => {
-		this.props.getUsersThunkCreator(selectPage, this.props.pageSize);
-	};
+  sendRequestToUsers = (selectPage) => {
+    this.props.getUsersThunkCreator(selectPage, this.props.pageSize);
+  };
 
-	componentDidMount() {
-		this.sendRequestToUsers(this.props.selectedPage);
-	}
+  componentDidMount() {
+    this.sendRequestToUsers(this.props.selectedPage);
+  }
 
-	ChageCurrentPageHandler = page => {
-		this.sendRequestToUsers(page);
-		this.props.chageCurrentPage(page);
-	};
+  ChageCurrentPageHandler = (page) => {
+    this.sendRequestToUsers(page);
+    this.props.chageCurrentPage(page);
+  };
 
-	render() {
-		return (
-			<Users
-				users={this.props.users}
-				addFriend={this.props.addFriend}
-				deleteFriend={this.props.deleteFriend}
-				totalUsersCount={this.props.totalUsersCount}
-				pageSize={this.props.pageSize}
-				changeCurrentPage={this.ChageCurrentPageHandler}
-				selectedPage={this.props.selectedPage}
-				isFeching={this.props.isFeching}
-				followingProgress={this.props.followingProgress}
-			/>
-		);
-	}
+  render() {
+    return (
+      <Users
+        users={this.props.users}
+        addFriend={this.props.addFriend}
+        deleteFriend={this.props.deleteFriend}
+        totalUsersCount={this.props.totalUsersCount}
+        pageSize={this.props.pageSize}
+        changeCurrentPage={this.ChageCurrentPageHandler}
+        selectedPage={this.props.selectedPage}
+        isFeching={this.props.isFeching}
+        followingProgress={this.props.followingProgress}
+      />
+    );
+  }
 }
 
-const mapStateToProps = state => {
-	return {
-		users: state.usersPage.users,
-		pageSize: state.usersPage.pageSize,
-		totalUsersCount: state.usersPage.totalUsersCount,
-		selectedPage: state.usersPage.selectedPage,
-		followingProgress: state.usersPage.followingProgress,
-		isFeching: state.usersPage.isFeching,
-	};
+const mapStateToProps = (state) => {
+  return {
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    selectedPage: getSelectedPage(state),
+    followingProgress: getFollowingProgress(state),
+    isFeching: getIsFeching(state),
+  };
 };
 // const mapDispathToProps = dispathc => {
 // 	return {
@@ -74,12 +82,15 @@ const mapStateToProps = state => {
 // };
 
 let actionCreators = {
-	addFriend,
-	deleteFriend,
-	chageCurrentPage,
-	toggleFollowingProgress,
-	getUsersThunkCreator,
+  addFriend,
+  deleteFriend,
+  chageCurrentPage,
+  toggleFollowingProgress,
+  getUsersThunkCreator,
 };
 
-const UsersContainer = connect(mapStateToProps, actionCreators)(UsersAPIcomponent);
+const UsersContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(UsersAPIcomponent);
 export default UsersContainer;

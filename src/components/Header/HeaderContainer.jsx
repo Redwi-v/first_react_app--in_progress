@@ -1,39 +1,35 @@
-import { connect } from 'react-redux';
-import Header from './Header';
-import { getAuthUserData, getAuthUserInfo, logout } from '../../redux/auth_reduser';
-import { useEffect } from 'react';
+import { connect } from "react-redux";
+import Header from "./Header";
+import { getAuthUserData, logout } from "../../redux/auth_reduser";
+import { useEffect } from "react";
 
-const HeaderContainer = props => {
-	const {
+const HeaderContainer = (props) => {
+  const {
+    userId,
+    // methods
+    getAuthUserData,
+  } = props;
 
-		userId,
-		// methods
-		getAuthUserData,
-		getAuthUserInfo,
-	} = props;
+  useEffect(() => {
+    userId && getAuthUserData(props.userId);
+  }, [props.isAuth]);
 
-	useEffect(() => {
-		getAuthUserInfo();
-		userId && getAuthUserData(props.userId);
-	}, [props.isAuth]);
-
-	return <Header {...props} />;
+  return <Header {...props} />;
 };
 
-const mapStateToProps = state => {
-	const { userId, email, login, isAuth, profile } = state.authReduser;
-	return {
-		userId,
-		email,
-		login,
-		isAuth,
-		smallPhoto: state.authReduser.profile.photos.small,
-		fullName: profile.fullName,
-	};
+const mapStateToProps = (state) => {
+  const { userId, email, login, isAuth, profile } = state.authReduser;
+  return {
+    userId,
+    email,
+    login,
+    isAuth,
+    smallPhoto: state.authReduser.profile.photos.small,
+    fullName: profile.fullName,
+  };
 };
 
 export default connect(mapStateToProps, {
-	getAuthUserData,
-	getAuthUserInfo,
-	logout
+  getAuthUserData,
+  logout,
 })(HeaderContainer);
